@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Git checkout') {
            steps{
-                git branch: 'master', url: 'https://github.com/TheoDuodu/projectupdate.git'
+                git branch: 'master', url: 'https://github.com/TheoDuodu/Challenge.git'
             }
         }
         
