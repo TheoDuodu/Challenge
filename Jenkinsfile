@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        AWS_ACCESS_KEY_ID    = credentials('aws_access_key_id')
+        AWS_SECRET_KEY = credentials('aws_secret_access_key')
+    }
     tools {
        terraform 'terraform'
     }
@@ -17,7 +21,8 @@ pipeline {
         }
     stage ("Dependency Check with Python Safety"){
          steps{
-            sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
+            sh "docker pull  pyupio/safety:latest"
+             sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
              sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
             }
         }
